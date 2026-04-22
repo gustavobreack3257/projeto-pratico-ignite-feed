@@ -1,3 +1,4 @@
+import { Avatar } from "./Avatar";
 import styles from "./Sidebar.module.css";
 import { PencilLineIcon } from "@phosphor-icons/react";
 export function Sidebar() {
@@ -8,13 +9,9 @@ export function Sidebar() {
         alt="Imagem de capa"
         className={styles.cover}
       />
-
       <div className={styles.profile}>
-        <img
-          src="https://github.com/gustavobreack3257.png"
-          alt=""
-          className={styles.avatar}
-        />
+        <Avatar />
+
         <strong>Gustavo costa</strong>
         <span>React developer</span>
       </div>

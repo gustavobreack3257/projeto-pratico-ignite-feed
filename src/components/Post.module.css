@@ -1,8 +1,42 @@
-.h1 {
-  color: #fff;
+.post {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  border-radius: 8px;
+  background: var(--gray-800)
 }
 
-body {
-  background: #000;
-  height: 80px;
+.post+.post {
+  margin-top: 2rem;
+}
+
+.author {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}
+
+.author strong {
+  display: block;
+  font-weight: bold;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.author span {
+  display: block;
+  line-height: 1.6;
+  color: var(--gray-400);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header>time {
+  font-size: 14px;
+  color: var(--gray-400);
 }
