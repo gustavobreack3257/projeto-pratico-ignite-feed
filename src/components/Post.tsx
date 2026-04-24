@@ -1,7 +1,7 @@
 import { Avatar } from "./Avatar";
 import styles from "./Post.module.css";
 
-export function Post(props) {
+export function Post() {
   return (
     <article className={styles.post}>
       <header>
@@ -17,6 +17,32 @@ export function Post(props) {
           Publicado ha 1 hora
         </time>
       </header>
+
+      <div className={styles.content}>
+        <p>Fala galeraa 👋</p>
+        <p>
+          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
+          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
+        </p>
+        <p>
+          <a href="//#endregion">👉 jane.design/doctorcare</a>
+        </p>
+
+        <p className={styles.link}>
+          <a href="//#region ">#novoprojeto</a> <a href="//#region ">#nlw</a>
+          <a href="//#endregion">#rocketseat</a>
+        </p>
+      </div>
+
+      <form action="" className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+
+        <textarea />
+
+        <footer>
+          <button type="submit">Publicar</button>
+        </footer>
+      </form>
     </article>
   );
 }
