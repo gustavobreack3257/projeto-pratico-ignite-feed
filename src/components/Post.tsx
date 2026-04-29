@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { formatDistanceToNow, format } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
+
 import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
-interface AuthorProps {
+export interface AuthorProps {
   avatarUrl: string;
   name: string;
-  role: string;
+  role?: string;
 }
 
 type ContentType = "paragraph" | "link";
@@ -25,7 +28,18 @@ export type PostProps = {
 };
 
 export function Post({ id, author, content, publishAt }: PostProps) {
+  const publishedDateFormatted = format(
+    publishAt,
+    "d 'de' LLLL 'ás' HH:mm'h'",
+    { locale: ptBR },
+  );
+  const publishedDateFormattedDistanceNow = formatDistanceToNow(publishAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
   const [comments, setComment] = useState(["Comentário aqui"]);
+
+  const commentsNow = new Date("2026-04-29 09:15:00");
 
   const [newComment, setNewComment] = useState("");
 
@@ -49,11 +63,8 @@ export function Post({ id, author, content, publishAt }: PostProps) {
           </div>
         </div>
 
-        <time
-          title={publishAt.toLocaleString()}
-          dateTime={publishAt.toISOString()}
-        >
-          Publicado em {publishAt.toLocaleDateString()}
+        <time title={publishedDateFormatted} dateTime={publishAt.toISOString()}>
+          {publishedDateFormattedDistanceNow}
         </time>
       </header>
 
@@ -93,7 +104,14 @@ export function Post({ id, author, content, publishAt }: PostProps) {
       </form>
 
       {comments.map((comment) => {
-        return <Comment key={comment} comment={comment} />;
+        return (
+          <Comment
+            key={comment}
+            author={author}
+            comment={comment}
+            publishedAt={commentsNow}
+          />
+        );
       })}
     </article>
   );

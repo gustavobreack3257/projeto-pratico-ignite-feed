@@ -1,23 +1,41 @@
 import styles from "./Comment.module.css";
+import type { AuthorProps } from "./Post";
 
 import { Avatar } from "./Avatar";
+
 import { ThumbsUpIcon, TrashIcon } from "@phosphor-icons/react";
+import { format, formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
 type CommentProps = {
   comment: string;
+  author: AuthorProps;
+  publishedAt: Date;
 };
-export function Comment({ comment }: CommentProps) {
+export function Comment({ comment, author, publishedAt }: CommentProps) {
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'ás' HH:mm'h'",
+    { locale: ptBR },
+  );
+  const publishedDateFormattedDistanceNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
   return (
     <div className={styles.commentContainer}>
-      <Avatar src="https://github.com/imbitubadigital.png" />
+      <Avatar src={author.avatarUrl} />
       <div className={styles.commentPost}>
         <section>
           <header className={styles.commentPostHeader}>
             <div>
-              <p>Antonio Joaquim</p>
+              <p>{author.name}</p>
 
-              <time title="22 de abril ás 9:00" dateTime="2026-4-22 09:00:00">
-                Cerca de 2 hrs atrás
+              <time
+                title={publishedDateFormatted}
+                dateTime={publishedAt.toISOString()}
+              >
+                {publishedDateFormattedDistanceNow}
               </time>
             </div>
 
