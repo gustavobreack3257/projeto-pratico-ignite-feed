@@ -96,6 +96,8 @@ header>time {
 .commentForm footer {
   visibility: hidden;
   max-height: 0;
+
+  margin-bottom: 1rem;
 }
 
 .commentForm:focus-within footer {
