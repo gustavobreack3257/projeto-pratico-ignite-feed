@@ -10,7 +10,7 @@ export function Sidebar() {
         className={styles.cover}
       />
       <div className={styles.profile}>
-        <Avatar />
+        <Avatar src="https://github.com/gustavobreack3257.png" hasborder />
 
         <strong>Gustavo costa</strong>
         <span>React developer</span>

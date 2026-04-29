@@ -1,32 +1,62 @@
 import { Avatar } from "./Avatar";
+import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
-export function Post() {
+interface AuthorProps {
+  avatarUrl: string;
+  name: string;
+  role: string;
+}
+
+type ContentType = "paragraph" | "link";
+
+interface ContentItemProps {
+  id: string;
+  type: ContentType;
+  content: string;
+}
+
+export type PostProps = {
+  id: string;
+  author: AuthorProps;
+  content: ContentItemProps[];
+  publishAt: Date;
+};
+
+export function Post({ id, author, content, publishAt }: PostProps) {
   return (
-    <article className={styles.post}>
+    <article className={styles.post} key={id}>
       <header>
         <div className={styles.author}>
-          <Avatar />
+          <Avatar src={author.avatarUrl} hasborder />
           <div className={styles.authorInfo}>
-            <strong>Gustavo Costa</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
-        <time title="22 de abril ás 9:00" dateTime="2026-4-22 09:00:00">
-          Publicado ha 1 hora
+        <time
+          title={publishAt.toLocaleString()}
+          dateTime={publishAt.toISOString()}
+        >
+          Publicado em {publishAt.toLocaleDateString()}
         </time>
       </header>
 
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p>
-          <a href="//#endregion">👉 jane.design/doctorcare</a>
-        </p>
+        {content.map((item) => {
+          if (item.type === "paragraph") {
+            return <p key={item.id}>{item.content}</p>;
+          }
+
+          if (item.type === "link") {
+            return (
+              <p key={item.id}>
+                <a href="//#endregion">{item.content}</a>
+              </p>
+            );
+          }
+        })}
 
         <p className={styles.link}>
           <a href="//#region ">#novoprojeto</a> <a href="//#region ">#nlw</a>
@@ -43,6 +73,8 @@ export function Post() {
           <button type="submit">Publicar</button>
         </footer>
       </form>
+
+      <Comment />
     </article>
   );
 }

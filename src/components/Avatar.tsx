@@ -1,10 +1,15 @@
 import styles from "./Avatar.module.css";
-export function Avatar() {
+
+type AvatarProps = {
+  src: string;
+  hasborder?: boolean;
+};
+export function Avatar({ src, hasborder = false }: AvatarProps) {
   return (
     <img
-      src="https://github.com/gustavobreack3257.png"
+      src={src}
       alt=""
-      className={styles.avatar}
+      className={hasborder ? styles.avatarWithBorder : styles.avatar}
     />
   );
 }
