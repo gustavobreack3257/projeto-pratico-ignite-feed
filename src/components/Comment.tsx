@@ -11,8 +11,14 @@ type CommentProps = {
   comment: string;
   author: AuthorProps;
   publishedAt: Date;
+  onDeleteComment?: (comment: string) => void;
 };
-export function Comment({ comment, author, publishedAt }: CommentProps) {
+export function Comment({
+  comment,
+  author,
+  publishedAt,
+  onDeleteComment,
+}: CommentProps) {
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'ás' HH:mm'h'",
@@ -22,6 +28,10 @@ export function Comment({ comment, author, publishedAt }: CommentProps) {
     locale: ptBR,
     addSuffix: true,
   });
+
+  function handleDeleteComment() {
+    onDeleteComment(comment);
+  }
   return (
     <div className={styles.commentContainer}>
       <Avatar src={author.avatarUrl} />
@@ -39,7 +49,7 @@ export function Comment({ comment, author, publishedAt }: CommentProps) {
               </time>
             </div>
 
-            <button type="button">
+            <button type="button" onClick={handleDeleteComment}>
               <TrashIcon size={24} />
             </button>
           </header>
