@@ -83,7 +83,7 @@
   transition: 0.1s;
 }
 
-.commentLike :hover {
+footer :hover {
   color: var(--green-300);
 }
 

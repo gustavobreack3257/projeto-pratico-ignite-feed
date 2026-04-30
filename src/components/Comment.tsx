@@ -6,6 +6,7 @@ import { Avatar } from "./Avatar";
 import { ThumbsUpIcon, TrashIcon } from "@phosphor-icons/react";
 import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
+import { useState } from "react";
 
 type CommentProps = {
   comment: string;
@@ -29,8 +30,14 @@ export function Comment({
     addSuffix: true,
   });
 
+  const [likeCount, setLikeCount] = useState(0);
+
   function handleDeleteComment() {
     onDeleteComment(comment);
+  }
+
+  function handleLikeCount() {
+    setLikeCount(likeCount + 1);
   }
   return (
     <div className={styles.commentContainer}>
@@ -58,9 +65,14 @@ export function Comment({
         </section>
 
         <footer>
-          <button className={styles.commentLike} type="button">
+          <button
+            className={styles.commentLike}
+            type="button"
+            onClick={handleLikeCount}
+          >
             <ThumbsUpIcon size={20} />
-            <span>Aplaudir 20</span>
+            Aplaudir
+            <span>{likeCount}</span>
           </button>
         </footer>
       </div>

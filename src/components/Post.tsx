@@ -49,8 +49,17 @@ export function Post({ id, author, content, publishAt }: PostProps) {
     setNewComment("");
   }
 
-  function handleNewCommentChange(event) {
+  function handleNewCommentChange(
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) {
+    event.target.setCustomValidity("");
     setNewComment(event.target.value);
+  }
+
+  function handleNewCommentInvalid(
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) {
+    event.target.setCustomValidity("Campo obrigatório");
   }
 
   function deleteComment(commentToDelete) {
@@ -62,6 +71,8 @@ export function Post({ id, author, content, publishAt }: PostProps) {
 
     setComment(commentsWithoutDeleted);
   }
+
+  const isNewCommentEmpty = newComment.length === 0;
   return (
     <article className={styles.post} key={id}>
       <header>
@@ -106,10 +117,14 @@ export function Post({ id, author, content, publishAt }: PostProps) {
           name="comment"
           value={newComment}
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Publicar
+          </button>
         </footer>
       </form>
 
