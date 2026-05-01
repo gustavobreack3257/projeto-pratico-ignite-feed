@@ -4,6 +4,7 @@ import { Post, type PostProps } from "./components/Post";
 import styles from "./App.module.css";
 import "./global.css";
 import { Sidebar } from "./components/Sidebar";
+import { useState } from "react";
 
 const post: PostProps[] = [
   {
@@ -46,6 +47,34 @@ const post: PostProps[] = [
   },
 ];
 export function App() {
+  const [posts, setPosts] = useState<PostProps[]>(post);
+  const [newPost, setNewPost] = useState("");
+
+  function handleAddPost(event: React.ChangeEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setPosts([
+      ...posts,
+      {
+        id: crypto.randomUUID(),
+        author: {
+          avatarUrl: "https://github.com/gustavobreack3257.png",
+          name: "Gustavo Costa Souza",
+          role: "Web developer",
+        },
+        content: [
+          { type: "paragraph", content: newPost, id: crypto.randomUUID() },
+        ],
+        publishAt: new Date("2026-04-29 09:15:00"),
+      },
+    ]);
+    setNewPost("");
+  }
+
+  function handleNewPostChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("");
+    setNewPost(event.target.value);
+  }
+
   return (
     <div>
       <Header />
@@ -54,7 +83,13 @@ export function App() {
         <Sidebar />
 
         <main>
-          {post.map((post) => {
+          <form onSubmit={handleAddPost} className={styles.ContainerForm}>
+            <label htmlFor="">Insira um novo post:</label>
+
+            <textarea value={newPost} onChange={handleNewPostChange} />
+            <button type="submit">Postar</button>
+          </form>
+          {posts.map((post) => {
             return (
               <Post
                 key={post.id}

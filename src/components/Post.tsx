@@ -37,13 +37,13 @@ export function Post({ id, author, content, publishAt }: PostProps) {
     locale: ptBR,
     addSuffix: true,
   });
-  const [comments, setComment] = useState(["Comentário aqui"]);
+  const [comments, setComment] = useState([]);
 
   const commentsNow = new Date("2026-04-29 09:15:00");
 
   const [newComment, setNewComment] = useState("");
 
-  function handleAddComment(event: React.FormEvent) {
+  function handleAddComment(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault();
     setComment([...comments, newComment]);
     setNewComment("");
