@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  -webkit-font-smoothing: antialiased;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --grid-cols-app: minmax(18rem, 20rem) 1fr;
+  --grid-cols-form: minmax(7.5rem, 17.5rem) minmax(25rem, 1fr) minmax(0, 15rem);
+
+  --border-width-6: 6px;
+
+  --color-violet-25: #fcfaff;
+
+  --color-error-25: #fffbfa;
+  --color-error-50: #fef3f2;
+  --color-error-100: #fee4e2;
+  --color-error-200: #fecdca;
+  --color-error-300: #fda29b;
+  --color-error-400: #f97066;
+  --color-error-500: #f04438;
+  --color-error-600: #d92d20;
+  --color-error-700: #b42318;
+  --color-error-800: #912018;
+  --color-error-900: #7a271a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =========================
+   GRID UTILITIES
+========================= */
+
+@utility grid-cols-app {
+  grid-template-columns: var(--grid-cols-app);
+}
+
+@utility grid-cols-form {
+  grid-template-columns: var(--grid-cols-form);
+}
+
+/* =========================
+   BORDER UTILITIES
+========================= */
+
+@utility border-6 {
+  border-width: var(--border-width-6);
+}
+
+/* =========================
+   COLOR UTILITIES
+========================= */
+
+@utility bg-violet-25 {
+  background-color: var(--color-violet-25);
+}
+
+@utility bg-error-25 {
+  background-color: var(--color-error-25);
+}
+
+@utility bg-error-50 {
+  background-color: var(--color-error-50);
+}
+
+@utility text-error-500 {
+  color: var(--color-error-500);
+}
+
+@utility border-error-500 {
+  border-color: var(--color-error-500);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-slide-down {
+  animation: slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility animate-slide-up {
+  animation: slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
