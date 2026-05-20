@@ -1,6 +1,17 @@
-import { Search } from "lucide-react";
+import {
+  BarChart,
+  CheckSquare,
+  Cog,
+  Flag,
+  Home,
+  LifeBuoy,
+  Search,
+  SquareStack,
+  Users,
+} from "lucide-react";
 import { LogoSVG } from "./Logo";
-import { Navigation } from "./Navigation";
+import { NavItem } from "./Navigation/NavItem";
+import { UsedSpaceWidget } from "./UsedSpaceWidget";
 
 export function Sidebar() {
   return (
@@ -15,7 +26,23 @@ export function Sidebar() {
         />
       </div>
 
-      <Navigation />
+      <nav className="space-y-2">
+        <NavItem icon={Home} title="Home" />
+        <NavItem icon={BarChart} title="Dashboard" />
+        <NavItem icon={SquareStack} title="Projects" />
+        <NavItem icon={CheckSquare} title="Tasks" />
+        <NavItem icon={Flag} title="Reporting" />
+        <NavItem icon={Users} title="Users" />
+      </nav>
+
+      <div className="mt-auto flex flex-col gap-6">
+        <nav className="space-y-1">
+          <NavItem title="Support" icon={LifeBuoy} />
+          <NavItem title="Settings" icon={Cog} />
+        </nav>
+
+        <UsedSpaceWidget />
+      </div>
     </aside>
   );
 }
