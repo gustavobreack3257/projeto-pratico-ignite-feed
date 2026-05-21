@@ -5,8 +5,10 @@ body {
 }
 
 @theme {
-  --grid-cols-app: minmax(18rem, 20rem) 1fr;
-  --grid-cols-form: minmax(7.5rem, 17.5rem) minmax(25rem, 1fr) minmax(0, 15rem);
+  --grid-columns-app: minmax(18rem, 20rem) 1fr;
+  --grid-columns-profile: max-content 1fr max-content;
+  --grid-columns-form: minmax(7.5rem, 17.5rem) minmax(25rem, 1fr)
+    minmax(0, 15rem);
 
   --border-width-6: 6px;
 
@@ -25,29 +27,21 @@ body {
   --color-error-900: #7a271a;
 }
 
-/* =========================
-   GRID UTILITIES
-========================= */
-
-@utility grid-cols-app {
-  grid-template-columns: var(--grid-cols-app);
+@utility grid-columns-app {
+  grid-template-columns: var(--grid-columns-app);
 }
 
-@utility grid-cols-form {
-  grid-template-columns: var(--grid-cols-form);
+@utility grid-columns-profile {
+  grid-template-columns: var(--grid-columns-profile);
 }
 
-/* =========================
-   BORDER UTILITIES
-========================= */
+@utility grid-columns-form {
+  grid-template-columns: var(--grid-columns-form);
+}
 
 @utility border-6 {
   border-width: var(--border-width-6);
 }
-
-/* =========================
-   COLOR UTILITIES
-========================= */
 
 @utility bg-violet-25 {
   background-color: var(--color-violet-25);
@@ -68,10 +62,6 @@ body {
 @utility border-error-500 {
   border-color: var(--color-error-500);
 }
-
-/* =========================
-   ANIMATIONS
-========================= */
 
 @keyframes slideDownAndFade {
   from {
