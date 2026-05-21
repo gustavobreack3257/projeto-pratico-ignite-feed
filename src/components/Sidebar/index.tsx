@@ -14,18 +14,22 @@ import { NavItem } from "./Navigation/NavItem";
 import { UsedSpaceWidget } from "./UsedSpaceWidget";
 import { Profile } from "./Profile";
 
+import * as Input from "@/components/Input";
+
 export function Sidebar() {
   return (
     <aside className="space-y-6 border-r border-zinc-200 px-5 py-8">
       <LogoSVG />
 
-      <div className="flex w-full items-center gap-2 rounded-lg border border-zinc-300 px-3 py-2 shadow-sm">
-        <Search className="h-5 w-5 text-zinc-500" />
-        <input
+      <Input.Root>
+        <Input.Prefix>
+          <Search className="h-5 w-5 text-zinc-500" />
+        </Input.Prefix>
+        <Input.Control
           className="flex-1 border-0 bg-transparent p-0 text-zinc-900 placeholder-zinc-600"
           placeholder="Search"
         />
-      </div>
+      </Input.Root>
 
       <nav className="space-y-2">
         <NavItem icon={Home} title="Home" />
